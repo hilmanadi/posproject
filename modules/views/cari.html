@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="contentsearch">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>No. </th>
+                    <th>Barcode ID</th>
+                    <th>Nama </th>
+                    <th>Stock (pcs)</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="No">1</td>
+                    <td data-label="Barcode ID">{{message}}</td>
+                    <td data-label="Nama">{{message+2}}</td>
+                    <td data-label="Stock (pcs)">{{message+3}}</td>
+                    <td data-label="Aksi">
+                        <button class="button is-warning"  @click="editCari('edit')">
+                            Edit    
+                        </button>
+                        <button class="button is-danger ml-2" @click="deleteCari('delete')">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td data-label="No">2</td>
+                    <td data-label="Barcode ID">{{message+1}}</td>
+                    <td data-label="Nama">{{message+4}}</td>
+                    <td data-label="Stock (pcs)">{{message+5}}</td>
+                    <td data-label="Aksi">
+                        <button class="button is-warning" @click="editCari('edit')">
+                            Edit    
+                        </button>
+                        <button class="button is-danger ml-2" @click="deleteCari('delete')">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data() {
+                return {
+                    message : 1
+                }
+            },
+            methods: {
+                editCari : (x) => {
+                    console.log(x)
+                },
+                deleteCari : (x) => {
+                    console.log(x)
+                }
+            },
+            mounted() {
+                
+            },
+        }).mount('#contentsearch')
+    </script>
+</body>
+</html>

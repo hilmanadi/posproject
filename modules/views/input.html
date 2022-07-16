@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="inputcontent">
+        <div class="columns">
+            <div class="column is-flex is-align-items-center  has-text-weight-bold">
+                Barcode Barang
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column ">
+                <input type="text" class="input">
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-flex is-align-items-center  has-text-weight-bold">
+                Nama Barang
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column ">
+                <input type="text" class="input">
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-flex is-align-items-center  has-text-weight-bold">
+                Stock
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column ">
+                <input type="text" class="input">
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-flex is-align-items-center  has-text-weight-bold">
+                Harga Normal
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column ">
+                <input type="text" class="input">
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-flex is-align-items-center  has-text-weight-bold">
+                Harga Grosir
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column ">
+                <input type="text" class="input">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const  {createApp} = Vue
+
+        createApp({
+            data() {
+                return {
+                    message : 'input page'    
+                }
+            },
+            mounted() {
+                
+            },
+            methods: {
+                
+            },
+        }).mount('#inputcontent')
+
+    </script>
+</body>
+</html>

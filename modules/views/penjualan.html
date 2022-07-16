@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <div id="penjualancontent">
+        <div class="columns">
+            <div class="column is-2 is-flex is-justify-content-center is-align-items-center has-text-weight-bold">Barcode Barang</div>
+            <div class="column">
+                <input type="text" class="input" v-model="inputPenjualan" v-on:change="cekOnchange(inputPenjualan)">
+            </div>
+        </div>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>
+                        No
+                    </th>
+                    <th>
+                        Nama Item
+                    </th>
+                    <th>
+                       Qty
+                    </th>
+                    <th>
+                        Harga normal
+                    </th>
+                    <th>
+                        Harga grosir
+                    </th>
+                    <th>
+                        Harga Total
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data() {
+                return {
+                    message:'penjualan page',
+                    inputPenjualan : '', 
+                }
+            },
+            methods: {
+                cekOnchange : function (x) {
+                    console.log(x)
+                    this.inputPenjualan = ''
+                }
+            },
+            mounted() {
+
+            },
+        }).mount('#penjualancontent')
+    </script>    
+</body>
+</html>
