@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/bulma.min.css">
+    <script src="./assets/js/vue.global.js"></script>
+</head>
+<body>
+    <div id="contentlogin">
+        <section class="hero is-danger is-fullheight is-flex is-justify-content-center is-align-items-center">
+            <div class="hero-body">
+                    <div class="box">
+                        <div class="columns ">
+                            <div class="column is-full has-text-weight-bold is-flex is-justify-content-center is-align-items-center">
+                                POINT OF SALES 
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column has-text-weight-bold">
+                                Login
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <input type="text" class="input" placeholder="e.g testing" v-model="usernameData">
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column has-text-weight-bold">
+                                Password
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <input type="password" class="input" placeholder="**********" v-model="passwordData">
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <button class="button is-primary" @click="loginProses()">Login</button>
+                                <button class="button is-warning ml-1" @click="clearProses()">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+          </section>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data(){
+                return{
+                    message : 'message nih bos',
+                    usernameData : '',
+                    passwordData : ''
+                }
+            },
+            methods : {
+                loginProses : function () {
+                    if(this.usernameData=='' || this.passwordData==''){
+                        alert('Username dan Password wajib terisi semua')
+                    }else{
+                        console.log('b')
+                        
+                    }
+                },
+                clearProses : function (){
+                    this.usernameData = '',
+                    this.passwordData = ''
+                }
+            },
+            mounted () {
+
+            }
+        }).mount('#contentlogin')
+    </script>
+</body>
+</html>
