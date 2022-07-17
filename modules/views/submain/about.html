@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="aboutcontent">
+        <section class="hero  is-fullheight-with-navbar">
+            <div class="hero-body is-flex is-justify-content-center is-align-items-center has-background-info-light-ter">
+              <div class="">
+                <p class="title">
+                    &copy;  {{titleData}}
+                </p>
+                <p class="subtitle">
+                    {{subtitleData}}
+                </p>
+              </div>
+            </div>
+          </section>
+    </div>    
+
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data(){
+                return{
+                   titleData : '2022 Hilman Adi Kartika All Right Reserved',
+                   subtitleData : 'Builded Using Bulma CSS, and Vue JS'
+                }
+            }
+        }).mount('#aboutcontent')
+    </script>
+</body>
+</html>

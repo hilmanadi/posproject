@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="dashboardcontent">
+        <section class="hero  is-fullheight-with-navbar">
+            <div class="hero-body is-flex is-justify-content-center is-align-items-center has-background-info-light-ter">
+              <div class="">
+                <p class="title">
+                    {{messageTitle}}
+                </p>
+                <p class="subtitle">
+                    {{messageSubtitle}}
+                </p>
+              </div>
+            </div>
+          </section>
+    </div>    
+
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data(){
+                return {
+                    messageTitle:'POINT OF SALES',
+                    messageSubtitle:'Selamat Datang di Aplikasi Point of Sales'
+                }
+            },
+        }).mount('#dashboardcontent')
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+   
+
+    <div id="contentpengguna" class="p-2">
+
+        <div class="modal" :class="{'is-active':isActiveBuat}">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Buat Data Pengguna</p>
+                <button class="delete" aria-label="close" @click="isActiveBuat=false"></button>
+              </header>
+              <section class="modal-card-body">
+                <div class="columns">
+                    <div class="column">
+                        <div class="columns">
+                            <div class="column">
+                                Username
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <input type="text" class="input">
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                Password
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <input type="password" class="input">
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                Shift
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <select name="" id="" class="select">
+                                <option value="Pagi">Pagi</option>
+                                <option value="Siang">Siang</option>
+                            </select>
+                        </div>                        
+                    </div>
+                </div>
+            </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button" @click="isActiveBuat=false">Cancel</button>
+              </footer>
+            </div>
+          </div>
+    
+          <div class="modal" :class="{'is-active':isActiveEdit}">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Edit Data Pengguna</p>
+                <button class="delete" aria-label="close" @click="isActiveEdit=false"></button>
+              </header>
+              <section class="modal-card-body">
+                Aku Edit
+            </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button" @click="isActiveEdit=false">Cancel</button>
+              </footer>
+            </div>
+          </div>
+
+        <div class="columns">
+            <div class="column">
+                <div class="columns">
+                    <div class="column is-2 is-flex is-align-items-center is-justify-content-center has-text-weight-bold">
+                        Cari User
+                    </div>
+                    <div class="column">
+                        <input type="text" class="input">
+                    </div>        
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <button class="button is-primary" @click="isActiveBuat=true">Buat Baru</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>
+                                No
+                            </th>
+                            <th>
+                                Username
+                            </th>
+                            <th>
+                                Shift
+                            </th>
+                            <th>
+                                Role
+                            </th>
+                            <th>
+                                Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                uhuy
+                            </td>
+                            <td>
+                                Admin
+                            </td>
+                            <td>
+                                pagi
+                            </td>
+                            <td>
+                                <button class="button is-warning" @click="isActiveEdit=true">
+                                    Edit
+                                </button>
+                                <button class="button is-danger ml-1" >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data(){
+                return {
+                    message : 'test',
+                    isActiveBuat : false,
+                    isActiveEdit : false,
+                }
+            }
+        }).mount('#contentpengguna')
+    </script>
+</body>
+</html>

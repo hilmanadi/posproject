@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point of Sales</title>
+    <script src="./assets/js/vue.global.js"></script>
+    <link rel="stylesheet" href="./assets/css/bulma.min.css">
+</head>
+<body>
+    <div id="maincontent">
+        <nav class="navbar has-background-info-light" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item has-text-weight-bold" @click="getMenu('dashboard')">
+                    {{navbarTitle}}
+                </a>
+        
+                <a role="button" class="navbar-burger " aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"  @click="isActive=!isActive">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+        
+            <div id="navbarBasicExample" class="navbar-menu has-background-info-light-ter" :class="{'is-active':isActive}">
+                <div class="navbar-start">
+                    <a class="navbar-item" v-for="items in navbarItems" @click="getMenu(items.action.click)">
+                        {{items.menu}}
+                    </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                          Laporan
+                        </a>
+                
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" v-for="items in navbarSubItemsRekap" @click="getSubMenu(items.action.click)">
+                                {{items.menu}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">
+                        {{usernameData}}
+                      </a>
+              
+                      <div class="navbar-dropdown is-right">
+                        <a class="navbar-item" v-for="items in navbarSubItemsUsers" @click="getSubMenu(items.action.click)">
+                           {{items.menu}} 
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+
+            </div>
+        </nav>
+        <div id="main" >
+
+        </div>
+    </div>  
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    message : 'testing',
+                    navbarTitle : 'POS',
+                    navbarItems : [{"menu":"Input","action":{"click":"input"}},{"menu":"Stok","action":{"click":"stok"}},{"menu":"Penjualan","action":{"click":"penjualan"}}],
+                    navbarSubItemsUsers : [{"menu":"Settings","action":{"click":"settings"}},{"menu":"Master Toko","action":{"click":"mastertoko"}},{"menu":"Master Pengguna","action":{"click":"pengguna"}},{"menu":"About","action":{"click":"about"}}],
+                    navbarSubItemsRekap :[{"menu":"Rekap Total","action":{"click":"rekaptotal"}},{"menu":"Rekap Hari Ini","action":{"click":"rekapjualhari"}}],
+                    isActive : false,
+                    usernameData : 'admin',
+                }
+            },
+            methods: {
+                getMenu : async function(x) {
+                    await fetch('./modules/views/main/'+x+'.html')
+                    .then((response) => {
+                        return response.text()
+                    })
+                    .then((resp)=>{
+                        document.querySelector('#main').innerHTML = resp;
+                        var scripts = Array.prototype.slice.call(document.getElementById('main').getElementsByTagName("script"));
+                        for (var i = 0; i < scripts.length; i++) {
+                            if (scripts[i].src != "") {
+                                var tag = document.createElement("script");
+                                tag.src = scripts[i].src;
+                                document.getElementsByTagName("head")[0].appendChild(tag);
+                                this.isActive = false;
+                            }
+                            else {
+                                eval(scripts[i].innerHTML);
+                                this.isActive = false;
+                            }
+                        }
+                    })
+                },
+                getSubMenu : async function(x,y){
+                    await fetch ('./modules/views/submain/'+x+'.html')
+                    .then((response)=> {
+                        return response.text()
+                    })
+                    .then((resp)=>{
+                        document.querySelector('#main').innerHTML = resp;
+                        var scripts = Array.prototype.slice.call(document.getElementById('main').getElementsByTagName("script"));
+                        for (var i = 0; i < scripts.length; i++) {
+                            if (scripts[i].src != "") {
+                                var tag = document.createElement("script");
+                                tag.src = scripts[i].src;
+                                document.getElementsByTagName("head")[0].appendChild(tag);
+                            }
+                            else {
+                                eval(scripts[i].innerHTML);
+                            }
+                        }
+                    })
+                    .catch((err)=>{
+                        alert(err);
+                    })
+                }
+            },
+            async mounted() {
+                await fetch('./modules/views/main/dashboard.html')
+                .then((response)=>{
+                    return response.text()
+                })
+                .then((resp)=>{
+                    document.querySelector('#main').innerHTML = resp;
+                    var scripts = Array.prototype.slice.call(document.getElementById('main').getElementsByTagName("script"));
+                    for (var i = 0; i < scripts.length; i++) {
+                        if (scripts[i].src != "") {
+                            var tag = document.createElement("script");
+                            tag.src = scripts[i].src;
+                            document.getElementsByTagName("head")[0].appendChild(tag);
+                            this.isActive = false;
+                        }
+                        else {
+                            eval(scripts[i].innerHTML);
+                            this.isActive = false;
+                        }
+                    }
+                })
+                .catch((err)=>{
+                    alert(err);
+                })
+            },
+        }).mount('#maincontent')
+    </script>
+</body>
+</html>
