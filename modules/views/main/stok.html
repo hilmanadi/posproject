@@ -68,11 +68,45 @@
                 }
             },
             methods: {
-                editCari : (x) => {
-                    console.log(x)
+                editCari : async (x) => {
+                    const dt = {"tag":'posproject_cu',"data":{"u":"1","p":"2","r":"3","s":"4","n":"5"}};
+                    await fetch('http://localhost/posproject/modules/models/api.php',{
+                        method : 'POST',
+                        cache : 'no-cache',
+                        headers : {
+                            'Content-Type':'application/json',
+                            'Authorization':'Acc50!',
+                        }, 
+                        body:JSON.stringify(dt)
+                    })
+                    .then((response)=>{
+                        return response.text()
+                    })
+                    .then((resp)=>{
+                        console.log(resp);
+                    })
+                    .catch((err)=>{
+                        alert(err);
+                    })
                 },
-                deleteCari : (x) => {
-                    console.log(x)
+                deleteCari : async (x) => {
+                    await fetch('http://localhost/posproject/modules/models/api.php',{
+                        method : 'GET',
+                        cache : 'no-cache',
+                        headers : {
+                            'Content-Type':'application/json',
+                            'Authorization':'Acc50!',
+                        },                        
+                    })
+                    .then((response)=>{
+                        return response.text()
+                    })
+                    .then((resp)=>{
+                        console.log(resp);
+                    })
+                    .catch((err)=>{
+                        alert(err);
+                    })
                 }
             },
             mounted() {
