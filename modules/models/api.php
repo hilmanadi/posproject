@@ -40,11 +40,11 @@
                         $result = $prp->fetchAll();
                         return $result;
                     }else if($tag=="posproject_su"){
-                        $sql = "SELECT * FROM pp_login where username like '%?%' and password like '%?%'";
+                        $sql = "SELECT * FROM pp_login where uname=? and password=?";
                         $prp = $db_connection->prepare($sql);
                         $prp->execute(array($data["u"],$data["p"]));
                         $result = $prp->fetchAll();
-                        return $result;
+                        echo base64_encode(json_encode($result));
                     }
                 }else{
                     echo '404, Request Prohibited';

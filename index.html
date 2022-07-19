@@ -60,7 +60,7 @@
                 }
             },
             methods : {
-                loginProses : function () {
+                loginProses : async function () {
                     if(this.usernameData=='' || this.passwordData==''){
                         alert('Username dan Password wajib terisi semua')
                     }else{
@@ -80,8 +80,12 @@
                             return response.text()
                         })
                         .then((resp) => {
-                            console.log(resp);
-                            if('')
+                            if(JSON.parse(atob(resp)).length=='0'){
+                                alert('Username dan password salah!!')
+                            }else{
+                                localStorage.setItem('pp_id',resp)
+                                window.location.href='main.html';
+                            }                                    
                         })
                         .catch((err) => {
                             alert(err);

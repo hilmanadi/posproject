@@ -128,29 +128,34 @@
                 }
             },
             async mounted() {
-                await fetch('./modules/views/main/dashboard.html')
-                .then((response)=>{
-                    return response.text()
-                })
-                .then((resp)=>{
-                    document.querySelector('#main').innerHTML = resp;
-                    var scripts = Array.prototype.slice.call(document.getElementById('main').getElementsByTagName("script"));
-                    for (var i = 0; i < scripts.length; i++) {
-                        if (scripts[i].src != "") {
-                            var tag = document.createElement("script");
-                            tag.src = scripts[i].src;
-                            document.getElementsByTagName("head")[0].appendChild(tag);
-                            this.isActive = false;
+                try{
+                    let dtl = JSON.parse(atob(localStorage.getItem('pp_id')));
+                    await fetch('./modules/views/main/dashboard.html')
+                    .then((response)=>{
+                        return response.text()
+                    })
+                    .then((resp)=>{
+                        document.querySelector('#main').innerHTML = resp;
+                        var scripts = Array.prototype.slice.call(document.getElementById('main').getElementsByTagName("script"));
+                        for (var i = 0; i < scripts.length; i++) {
+                            if (scripts[i].src != "") {
+                                var tag = document.createElement("script");
+                                tag.src = scripts[i].src;
+                                document.getElementsByTagName("head")[0].appendChild(tag);
+                                this.isActive = false;
+                            }
+                            else {
+                                eval(scripts[i].innerHTML);
+                                this.isActive = false;
+                            }
                         }
-                        else {
-                            eval(scripts[i].innerHTML);
-                            this.isActive = false;
-                        }
-                    }
-                })
-                .catch((err)=>{
-                    alert(err);
-                })
+                    })
+                    .catch((err)=>{
+                        alert(err);
+                    })
+                }catch(err){
+                    window.location.href='index.html';
+                }
             },
         }).mount('#maincontent')
     </script>
