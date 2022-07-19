@@ -10,12 +10,12 @@
         
         <div class="columns">
             <div class="column has-text-weight-bold">
-                Nama
+                <b>Nama</b> *Jangan Diisi jika tidak ingin mengganti nama
             </div>
         </div>
         <div class="columns">
             <div class="column ">
-                <input type="text" class="input">
+                <input type="text" class="input" v-model="namaUser">
             </div>
         </div>
 
@@ -26,7 +26,7 @@
         </div>
         <div class="columns">
             <div class="column ">
-                <input type="text" class="input" disabled>
+                <input type="text" class="input" disabled v-model="unameUser">
             </div>
         </div>
 
@@ -37,7 +37,15 @@
         </div>
         <div class="columns">
             <div class="column ">
-                <input type="password" class="input">
+                <input type="password" class="input" v-model="pswdUser">
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="column ">
+                <button class="button is-warning" @click="updateUser">
+                    Update
+                </button>
             </div>
         </div>
     </div>    
@@ -48,9 +56,19 @@
         createApp({
             data(){
                 return{
-                    message:'setting page'
+                    unameUser : '',
+                    pswdUser : '',
+                    namaUser : '',
                 }
-            }
+            },
+            methods: {
+                updateUser : function (){
+                    console.log(this.unameUser,this.pswdUser,this.namaUser)
+                }
+            },
+            mounted() {
+                
+            },
         }).mount('#settingscontent')
     </script>
 </body>

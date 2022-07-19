@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 <body>
-
-   
-
     <div id="contentpengguna" class="p-2">
-
         <div class="modal" :class="{'is-active':isActiveBuat}">
             <div class="modal-background"></div>
             <div class="modal-card">
@@ -23,12 +18,12 @@
                 <div class="columns">
                     <div class="column">
                         <div class="columns">
-                            <div class="column">
+                            <div class="column" >
                                 Username
                             </div>
                         </div>
                         <div class="columns">
-                            <input type="text" class="input">
+                            <input type="text" class="input" v-model="unamePengguna">
                         </div>
                         <div class="columns">
                             <div class="column">
@@ -36,7 +31,7 @@
                             </div>
                         </div>
                         <div class="columns">
-                            <input type="password" class="input">
+                            <input type="password" class="input" v-model="pswdPengguna">
                         </div>
                         <div class="columns">
                             <div class="column">
@@ -44,16 +39,27 @@
                             </div>
                         </div>
                         <div class="columns">
-                            <select name="" id="" class="select">
+                            <select name="" id="" class="select" v-model="shiftPengguna">
                                 <option value="Pagi">Pagi</option>
                                 <option value="Siang">Siang</option>
                             </select>
-                        </div>                        
+                        </div>    
+                        <div class="columns">
+                            <div class="column">
+                                Role
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <select name="" id="" class="select" v-model="rolePengguna">
+                                <option value="admin">Admin</option>
+                                <option value="pegawai">Pegawai</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </section>
               <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
+                <button class="button is-success" @click="savePengguna">Save changes</button>
                 <button class="button" @click="isActiveBuat=false">Cancel</button>
               </footer>
             </div>
@@ -67,10 +73,48 @@
                 <button class="delete" aria-label="close" @click="isActiveEdit=false"></button>
               </header>
               <section class="modal-card-body">
-                Aku Edit
+                <div class="columns">
+                    <div class="column">
+                        <div class="columns">
+                            <div class="column">
+                                Username
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <input type="text" class="input" v-model="unamePengguna">
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                Password
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                Nama
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <input type="text" class="input" v-model="namaPengguna">
+                        </div>
+                        <div class="columns">
+                            <input type="password" class="input" v-model="pswdPengguna">
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                Shift
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <select name="" id="" class="select" v-model="shiftPengguna">
+                                <option value="Pagi">Pagi</option>
+                                <option value="Siang">Siang</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </section>
               <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
+                <button class="button is-success" @click="editPengguna">Save changes</button>
                 <button class="button" @click="isActiveEdit=false">Cancel</button>
               </footer>
             </div>
@@ -130,10 +174,10 @@
                                 pagi
                             </td>
                             <td>
-                                <button class="button is-warning" @click="isActiveEdit=true">
+                                <button class="button is-warning" @click="editClicked">
                                     Edit
                                 </button>
-                                <button class="button is-danger ml-1" >
+                                <button class="button is-danger ml-1" @click="deleteClicked">
                                     Delete
                                 </button>
                             </td>
@@ -149,11 +193,82 @@
         createApp({
             data(){
                 return {
-                    message : 'test',
+                    unamePengguna : '',
+                    pswdPengguna : '',
+                    shiftPengguna : '',
+                    rolePengguna : '',
+                    namaPengguna : '',
                     isActiveBuat : false,
                     isActiveEdit : false,
                 }
-            }
+            },
+            methods: {
+                editClicked : function () {
+                    this.isActiveEdit = true;
+                },
+                deleteClicked : function (){
+                    if(confirm('Yakin Hapus Data Ini ?')){
+                        console.log('a')
+                    }
+                },
+                savePengguna : async function (){
+                    let uname = this.unamePengguna;
+                    let pswd = this.pswdPengguna;
+                    let shift = this.shiftPengguna;
+                    let role = this.rolePengguna;
+                    let nama = this.namaPengguna;
+
+                    const dt = { "tag": 'posproject_cu', "data": { "u": uname, "p": pswd, "r": role, "s": shift, "n": nama } };
+                    await fetch('http://localhost/posproject/modules/models/api.php', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Acc50!',
+                        },
+                        body: JSON.stringify(dt)
+                    })
+                    .then((response) => {
+                        return response.text()
+                    })
+                    .then((resp) => {
+                        console.log(resp);
+                    })
+                    .catch((err) => {
+                        alert(err);
+                    })
+                },
+                editPengguna : async function () {
+                    let uname = this.unamePengguna;
+                    let pswd = this.pswdPengguna;
+                    let shift = this.shiftPengguna;
+                    let role = this.rolePengguna;
+                    let nama = this.namaPengguna;
+                    
+                    const dt = { "tag": 'posproject_uu', "data": { "p": pswd, "r": role, "s": shift, "n": nama } };
+                    await fetch('http://localhost/posproject/modules/models/api.php', {
+                        method: 'POST',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Acc50!',
+                        },
+                        body: JSON.stringify(dt)
+                    })
+                        .then((response) => {
+                            return response.text()
+                        })
+                        .then((resp) => {
+                            console.log(resp);
+                        })
+                        .catch((err) => {
+                            alert(err);
+                        })
+                }
+            },
+            mounted() {
+                
+            },
         }).mount('#contentpengguna')
     </script>
 </body>
